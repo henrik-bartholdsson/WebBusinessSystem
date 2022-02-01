@@ -12,6 +12,6 @@ namespace WebBS.Data.Models
         public double CostPrice { get; set; }
         public double Price { get; set; }
         public double Coverage { get; set; }
-        public int Supplier { get; set; }
+        public string Supplier { get; set; }
     }
 }
