@@ -4,6 +4,7 @@
 }
 
 <h3>@Model.Name</h3>
+<div>Price: @(Math.Round(Model.CostPrice * ((Model.Coverage / 100) + 1),1))</div>
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
