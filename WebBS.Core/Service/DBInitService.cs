@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WebBS.Data;
-using WebBS.Data.Models;
+﻿using WebBS.Data.Models;
 
 namespace WebBS.Core.Service
 {
@@ -15,9 +11,6 @@ namespace WebBS.Core.Service
             context.Items.Add(item);
 
             context.SaveChanges();
-
-            var dbInitiator = new InitializeDatabase();
-            dbInitiator.Init();
         }
     }
 }
