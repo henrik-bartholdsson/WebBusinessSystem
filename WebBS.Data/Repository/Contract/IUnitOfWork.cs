@@ -8,5 +8,6 @@ namespace WebBS.Data.Repository.Contract
     {
         IOrderHeadRepository OrderHeadRepository { get; }
         IItemRepository ItemRepository { get; }
+        ICategoryRepository CategoryRepository { get; }
     }
 }

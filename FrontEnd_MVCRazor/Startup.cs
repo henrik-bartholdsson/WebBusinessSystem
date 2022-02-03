@@ -11,6 +11,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebBS.Core.Service;
 using WebBS.Data.Models;
+using WebBS.Data.Repository;
+using WebBS.Data.Repository.Contract;
 
 namespace FrontEnd_MVCRazor
 {
@@ -31,7 +33,10 @@ namespace FrontEnd_MVCRazor
                 options.UseInMemoryDatabase("InMemoryDatabase");
             });
 
-            services.AddControllersWithViews();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IWebBSService, WebBSService>();
+
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

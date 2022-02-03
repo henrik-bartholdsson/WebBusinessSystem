@@ -11,10 +11,12 @@ namespace WebBS.Data.Repository
             _context = context;
             OrderHeadRepository = new OrderHeadRepository(_context);
             ItemRepository= new ItemRepository(_context);
+            CategoryRepository= new CategoryRepository(_context);
         }
 
 
         public IOrderHeadRepository OrderHeadRepository { get; private set; }
         public IItemRepository ItemRepository { get; private set; }
+        public ICategoryRepository CategoryRepository { get; private set; }
     }
 }

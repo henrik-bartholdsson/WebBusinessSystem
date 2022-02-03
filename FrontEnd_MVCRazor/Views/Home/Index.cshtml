@@ -1,12 +1,32 @@
-﻿@model WebBS.Data.Models.Item
-@{
+﻿@{
     ViewData["Title"] = "Home Page";
+    // Web content are not centerd correctly.
 }
 
-<h3>@Model.Name</h3>
-<div>Price: @(Math.Round(Model.CostPrice * ((Model.Coverage / 100) + 1),1))</div>
+<div class="container h-100">
+    <div class="align-self-center w-100 border rounded">
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+        <div class="row align-self-center w-100" style="height: 800px;">
+
+        <div class="rounded border border-primary overflow-auto h-100 w-25" id="menu">
+            <div>
+                <button onclick="SetContent()">Cont1</button>
+            </div>
+        </div>
+
+        <div class="rounded border border-primary overflow-auto h-100 w-75" id="content">
+            <div >
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+<script>
+    function SetContent()
+    {
+        console.log("Hej");
+        document.getElementById('content').innerHTML = "Test..."
+    }
+
+</script>

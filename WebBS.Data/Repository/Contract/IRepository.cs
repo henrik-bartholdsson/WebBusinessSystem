@@ -7,7 +7,7 @@ namespace WebBS.Data.Repository.Contract
     {
         Task<TEntity> GetAsync(int id);
 
-        Task<IEnumerable<TEntity>> GetAllAsync();
+        public Task<IEnumerable<TEntity>> GetAllAsync();
 
         void AddAsync(TEntity entity);
 
