@@ -28,5 +28,16 @@ namespace WebBS.Core.Service
             return _context.Items.Where(i => i != null).FirstOrDefault();
         }
 
+        public async Task<IEnumerable<Category>> GetAllNestedCategoriesAsync()
+        {
+            return await _unitOfWork.CategoryRepository.GetAllNestedCategoriesAsync();
+        }
+
+
+        #region Helpers
+
+
+        #endregion
+
     }
 }

@@ -10,5 +10,6 @@ namespace WebBS.Core.Service
     {
         public Item GetFirstItem();
         public Task<IEnumerable<Category>> GetCategories();
+        public Task<IEnumerable<Category>> GetAllNestedCategoriesAsync();
     }
 }

@@ -10,29 +10,29 @@ namespace WebBS.Core.Service
 
             context.Items.Add(item);
 
-            var top1 = new Category { Name = "ProductsA", Id = 1 };
-            var top2 = new Category { Name = "ProductsB", Id = 2 };
+            var lowA = new Category { Name = "LowA", Id = 6, ParentId = 3 };
+            var lowAA = new Category { Name = "LowAA", Id = 7, ParentId = 3 };
 
-            var mid1 = new Category { Name = "MidA", Id = 3, ParentId = 1};
-            var mid2 = new Category { Name = "MidB", Id = 4, ParentId = 2};
-            var mid3 = new Category { Name = "MidC", Id = 5, ParentId = 2 };
+            var lowB = new Category { Name = "LowB", Id = 8, ParentId = 4 };
 
-            var low1 = new Category { Name = "LowA", Id = 6, ParentId = 3};
-            var low2 = new Category { Name = "LowAA", Id=7, ParentId = 3};
+            var lowC = new Category { Name = "LowC", Id = 9, ParentId = 5 };
 
-            var low3 = new Category { Name = "LowB", Id = 8, ParentId = 4};
+            var midA = new Category { Name = "MidA", Id = 3, ParentId = 1 };
+            var midB = new Category { Name = "MidB", Id = 4, ParentId = 2 };
+            var midC = new Category { Name = "MidC", Id = 5, ParentId = 2 };
 
-            var low4 = new Category { Name = "LowC", Id = 8, ParentId = 5 };
+            var topA = new Category { Name = "ProductsA", Id = 1 };
+            var topB = new Category { Name = "ProductsB", Id = 2 };
 
-            context.Categories.Add(top1);
-            context.Categories.Add(top2);
-            context.Categories.Add(mid1);
-            context.Categories.Add(mid2);
-            context.Categories.Add(mid3);
-            context.Categories.Add(low1);
-            context.Categories.Add(low2);
-            context.Categories.Add(low3);
-            context.Categories.Add(low4);
+            context.Categories.Add(topA);
+            context.Categories.Add(topB);
+            context.Categories.Add(midA);
+            context.Categories.Add(midB);
+            context.Categories.Add(midC);
+            context.Categories.Add(lowA);
+            context.Categories.Add(lowAA);
+            context.Categories.Add(lowB);
+            context.Categories.Add(lowC);
 
 
             context.SaveChanges();

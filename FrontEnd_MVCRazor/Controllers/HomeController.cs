@@ -15,16 +15,17 @@ namespace FrontEnd_MVCRazor.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly WebBSService _service;
+        private readonly IWebBSService _service;
 
-        public HomeController(ILogger<HomeController> logger, WebBSContext _context)
+        public HomeController(ILogger<HomeController> logger, IWebBSService service)
         {
-            _service = new WebBSService(_context);
+            _service = service;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
+            var allCategories = _service.GetAllNestedCategoriesAsync();
             var firstItem = _service.GetFirstItem();
 
             return View(firstItem);
