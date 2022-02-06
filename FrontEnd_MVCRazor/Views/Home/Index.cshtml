@@ -3,30 +3,70 @@
     // Web content are not centerd correctly.
 }
 
-<div class="container h-100">
-    <div class="align-self-center w-100 border rounded">
+<body onload="GetValue()">
+    <div class="container h-100">
+        <div class="align-self-center w-100 border rounded">
 
-        <div class="row align-self-center w-100" style="height: 800px;">
+            <div class="row align-self-center w-100" style="height: 800px;">
 
-        <div class="rounded border border-primary overflow-auto h-100 w-25" id="menu">
-            <div>
-                <button onclick="SetContent()">Cont1</button>
+                <div class="rounded border border-primary overflow-auto h-100 w-25" id="menu">
+                    <div>
+                        <button onclick="SetContent()">Cont1</button>
+                    </div>
+
+                </div>
+
+                <div class="rounded border border-primary overflow-auto h-100 w-75" id="content">
+                    <div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="rounded border border-primary overflow-auto h-100 w-75" id="content">
-            <div >
-            </div>
-        </div>
     </div>
-    </div>
-    </div>
+</body>
 
 <script>
     function SetContent()
     {
-        console.log("Hej");
         document.getElementById('content').innerHTML = "Test..."
+    }
+
+    async function GetValue()
+    {
+        var response = await fetch("home/values",
+        {
+            method: 'GET'
+        })
+
+        if(response.status == 200)
+        {
+            var result = await response.json()
+            SetMenu(result, 'menu')
+            console.log(result)
+        }
+        else
+        {
+            console.log('not ok')
+        }
+    }
+
+    function SetMenu(menuItems, elementId)
+    {
+        menuItems.map(i => 
+        {
+            var tag = document.createElement('p')
+            tag.setAttribute('id', i.id)
+            var text = document.createTextNode(i.name)
+            tag.appendChild(text)
+            var element = document.getElementById(elementId)
+            element.appendChild(tag)
+
+            if(i.subCategories != null)
+            {
+                SetMenu(i.subCategories, i.id)
+            }
+            
+        })
     }
 
 </script>

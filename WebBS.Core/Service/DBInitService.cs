@@ -1,4 +1,5 @@
-﻿using WebBS.Data.Models;
+﻿using System;
+using WebBS.Data.Models;
 
 namespace WebBS.Core.Service
 {
@@ -10,19 +11,25 @@ namespace WebBS.Core.Service
 
             context.Items.Add(item);
 
-            var lowA = new Category { Name = "LowA", Id = 6, ParentId = 3 };
-            var lowAA = new Category { Name = "LowAA", Id = 7, ParentId = 3 };
+            var TopA = Guid.NewGuid();
+            var TopB = Guid.NewGuid();
+            var MidA = Guid.NewGuid();
+            var MidB = Guid.NewGuid();
+            var MidC = Guid.NewGuid();
 
-            var lowB = new Category { Name = "LowB", Id = 8, ParentId = 4 };
+            var lowA = new Category { Name = "LowA31", Id = Guid.NewGuid(), ParentId = MidA };
+            var lowAA = new Category { Name = "LowA32", Id = Guid.NewGuid(), ParentId = MidA };
 
-            var lowC = new Category { Name = "LowC", Id = 9, ParentId = 5 };
+            var lowB = new Category { Name = "LowB31", Id = Guid.NewGuid(), ParentId = MidB };
 
-            var midA = new Category { Name = "MidA", Id = 3, ParentId = 1 };
-            var midB = new Category { Name = "MidB", Id = 4, ParentId = 2 };
-            var midC = new Category { Name = "MidC", Id = 5, ParentId = 2 };
+            var lowC = new Category { Name = "LowB32", Id = Guid.NewGuid(), ParentId = MidC };
 
-            var topA = new Category { Name = "ProductsA", Id = 1 };
-            var topB = new Category { Name = "ProductsB", Id = 2 };
+            var midA = new Category { Name = "MidA21", Id = MidA, ParentId = TopA };
+            var midB = new Category { Name = "MidB21", Id = MidB, ParentId = TopB };
+            var midC = new Category { Name = "MidB22", Id = MidC, ParentId = TopB };
+
+            var topA = new Category { Name = "ProductsA11", Id = TopA, TopLevel = true };
+            var topB = new Category { Name = "ProductsB11", Id = TopB, TopLevel = true };
 
             context.Categories.Add(topA);
             context.Categories.Add(topB);

@@ -36,7 +36,8 @@ namespace FrontEnd_MVCRazor
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IWebBSService, WebBSService>();
 
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddControllersWithViews().AddNewtonsoftJson().AddRazorRuntimeCompilation();
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

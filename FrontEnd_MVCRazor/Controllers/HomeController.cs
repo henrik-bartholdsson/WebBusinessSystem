@@ -25,7 +25,7 @@ namespace FrontEnd_MVCRazor.Controllers
 
         public IActionResult Index()
         {
-            var allCategories = _service.GetAllNestedCategoriesAsync();
+            var allCategories = _service.GetAllNestedCategoriesAsync().Result;
             var firstItem = _service.GetFirstItem();
 
             return View(firstItem);
@@ -41,5 +41,18 @@ namespace FrontEnd_MVCRazor.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
+        #region Api actions
+
+        [HttpGet]
+        public IActionResult Values()
+        {
+            
+            var allCategories = _service.GetAllNestedCategoriesAsync().Result;
+            return Json(allCategories);
+        }
+
+        #endregion
     }
 }

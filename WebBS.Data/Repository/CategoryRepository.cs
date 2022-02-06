@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,9 +18,10 @@ namespace WebBS.Data.Repository
 
         public async Task<IEnumerable<Category>> GetAllNestedCategoriesAsync()
         {
-            return await _context.Categories.Where(c => c.ParentId == 0).Include(x => x.SubCategories)
+            var result = await _context.Categories.Where(c => c.TopLevel == true).Include(x => x.SubCategories)
                 .ThenInclude(x => x.SubCategories)
                 .ToListAsync();
+            return result;
         }
     }
 }
