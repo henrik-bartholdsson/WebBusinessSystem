@@ -33,7 +33,7 @@
 
     async function GetValue()
     {
-        var response = await fetch("home/values",
+        var response = await fetch("home/MenuItems",
         {
             method: 'GET'
         })
@@ -42,31 +42,69 @@
         {
             var result = await response.json()
             SetMenu(result, 'menu')
-            console.log(result)
         }
         else
         {
-            console.log('not ok')
+            console.warn('Could not load menu')
         }
     }
 
     function SetMenu(menuItems, elementId)
     {
+            var list = document.createElement('ul');
+            list.setAttribute('id', elementId + '_ul')
+
         menuItems.map(i => 
         {
-            var tag = document.createElement('p')
-            tag.setAttribute('id', i.id)
+            var li1 = document.createElement('li')
+            li1.setAttribute('id', i.id + '_li1')
+
+            var aTag = document.createElement('button');
+            aTag.setAttribute('id', i.id);
+            aTag.setAttribute('class','btn btn-link');
+
+            aTag.setAttribute('onclick', 'SetContent("' + i.id + '")')
+
             var text = document.createTextNode(i.name)
-            tag.appendChild(text)
-            var element = document.getElementById(elementId)
-            element.appendChild(tag)
+            aTag.appendChild(text)
+
+            li1.appendChild(aTag);
+
+            list.appendChild(li1)
 
             if(i.subCategories != null)
             {
-                SetMenu(i.subCategories, i.id)
+            var li2 = document.createElement('li')
+            li2.setAttribute('id', i.id + 'li2');
+            list.appendChild(li2)
             }
-            
+
+            var element = document.getElementById(elementId)
+            element.appendChild(list)
+
+            if(i.subCategories != null)
+            {
+                SetMenu(i.subCategories, i.id + 'li2')
+            }
         })
+    }
+
+    async function SetContent(id)
+    {
+        console.log('fetching id:' + id)
+        var response = await fetch('home/category/?guid=' + id);
+        var result = await response.json();
+        console.log(result)
+
+        var tag = document.createElement('h3')
+        tag.setAttribute('id', id)
+        var name = document.createTextNode(result.name)
+        tag.appendChild(name)
+        var element = document.getElementById('content');
+
+        element.innerHTML = "";
+
+        element.appendChild(tag);
     }
 
 </script>
