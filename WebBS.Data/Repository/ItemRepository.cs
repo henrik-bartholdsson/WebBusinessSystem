@@ -1,4 +1,9 @@
-﻿using WebBS.Data.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using WebBS.Data.Models;
 using WebBS.Data.Repository.Contract;
 
 namespace WebBS.Data.Repository
@@ -10,6 +15,11 @@ namespace WebBS.Data.Repository
         public ItemRepository(WebBSContext context) : base(context)
         {
             _context = context;
+        }
+
+        public async Task<IEnumerable<Item>> GetItemsByCategoryId(Guid guid)
+        {
+            return await _context.Items.Where(x => x.Category == guid).ToListAsync();
         }
     }
 }

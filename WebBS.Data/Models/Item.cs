@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace WebBS.Data.Models
 {
@@ -13,5 +11,6 @@ namespace WebBS.Data.Models
         public double Price { get; set; }
         public double Coverage { get; set; }
         public string Supplier { get; set; }
+        public Guid Category { get; set; }
     }
 }

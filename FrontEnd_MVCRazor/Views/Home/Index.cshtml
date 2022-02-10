@@ -92,19 +92,38 @@
     async function SetContent(id)
     {
         console.log('fetching id:' + id)
-        var response = await fetch('home/category/?guid=' + id);
+        var response = await fetch('home/items/?guid=' + id);
         var result = await response.json();
         console.log(result)
 
-        var tag = document.createElement('h3')
-        tag.setAttribute('id', id)
-        var name = document.createTextNode(result.name)
-        tag.appendChild(name)
         var element = document.getElementById('content');
 
         element.innerHTML = "";
 
-        element.appendChild(tag);
+        itemList = BuildContentList(result);
+
+        element.appendChild(itemList);
+    }
+
+    function BuildContentList(result)
+    {
+        var list = document.createElement('ul');
+        list.setAttribute('id', 'itemList')
+
+        result.map(x => {
+            var listItem = document.createElement('li');
+            listItem.setAttribute('id', x.id);
+
+            var name = document.createElement('p')
+            var nameText = document.createTextNode(x.name)
+
+            name.appendChild(nameText)
+            listItem.appendChild(name);
+
+            list.appendChild(listItem);
+        })
+
+        return list;
     }
 
 </script>

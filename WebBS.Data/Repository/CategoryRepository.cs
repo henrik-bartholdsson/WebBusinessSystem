@@ -16,11 +16,35 @@ namespace WebBS.Data.Repository
             _context = context;
         }
 
-        public async Task<IEnumerable<Category>> GetAllNestedCategoriesAsync()
+        public Task<Category> FindByIdAsync(Guid guid)
         {
-            var result = await _context.Categories.Where(c => c.TopLevel == true).Include(x => x.SubCategories)
+            var result = _context.Categories
+                .Where(x => x.Id == guid)
+                .Include(x => x.SubCategories)
+                .ThenInclude(x => x.SubCategories)
+                .FirstOrDefaultAsync();
+
+            return result;
+        }
+
+        public async Task<IEnumerable<Category>> GetNestedCategoriesAsync()
+        {
+            var result = await _context.Categories
+                .Where(c => c.TopLevel == true)
+                .Include(x => x.SubCategories)
                 .ThenInclude(x => x.SubCategories)
                 .ToListAsync();
+
+            return result;
+        }
+
+        public async Task<IEnumerable<Category>> GetSubCategoriesAsync(Guid guid)
+        {
+            var result = await _context.Categories
+                .Where(c => c.Id == guid).Include(x => x.SubCategories)
+                .ThenInclude(x => x.SubCategories)
+                .ToListAsync();
+
             return result;
         }
     }

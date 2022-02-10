@@ -8,8 +8,8 @@ namespace WebBS.Core.Service
 {
     public interface IWebBSService
     {
-        public Item GetFirstItem();
         public Task<IEnumerable<Category>> GetCategories();
         public Task<IEnumerable<Category>> GetAllNestedCategoriesAsync();
+        public Task<IEnumerable<Item>> GetAllItemsInCategory(Guid guid);
     }
 }

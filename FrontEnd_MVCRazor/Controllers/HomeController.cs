@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebBS.Core;
 using WebBS.Core.Service;
-using WebBS.Data.Models;
+using WebBS.Data.Repository.Contract;
 
 namespace FrontEnd_MVCRazor.Controllers
 {
@@ -16,19 +16,20 @@ namespace FrontEnd_MVCRazor.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IWebBSService _service;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger, IWebBSService service)
+        public HomeController(ILogger<HomeController> logger, IWebBSService service, IUnitOfWork unitOfWork)
         {
             _service = service;
             _logger = logger;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
             var allCategories = _service.GetAllNestedCategoriesAsync().Result;
-            var firstItem = _service.GetFirstItem();
 
-            return View(firstItem);
+            return View();
         }
 
         public IActionResult Privacy()
@@ -46,11 +47,27 @@ namespace FrontEnd_MVCRazor.Controllers
         #region Api actions
 
         [HttpGet]
-        public IActionResult Values()
+        public IActionResult MenuItems()
         {
             
             var allCategories = _service.GetAllNestedCategoriesAsync().Result;
             return Json(allCategories);
+        }
+
+        [HttpGet]
+        public IActionResult Category([FromQuery] Guid guid)
+        {
+            var category = _unitOfWork.CategoryRepository.FindByIdAsync(guid).Result;
+
+            return Json(category);
+        }
+
+        [HttpGet]
+        public IActionResult Items([FromQuery] Guid guid)
+        {
+            var items = _service.GetAllItemsInCategory(guid).Result;
+
+            return Json(items);
         }
 
         #endregion
