@@ -1,0 +1,43 @@
+.CategoryItem {
+    border: 1px;
+    border-style:solid;
+    border-radius: 5px;
+    border-color: black;
+    background-color: rgb(194, 194, 194);
+    margin-top: 2px;
+    overflow: hidden;
+}
+
+.VisualPadding {
+    background-color:rgb(53, 197, 101);
+    width: 3%;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    height: 24px;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.TextArea {
+    padding-left: 4%;
+    height: 24px;
+    font-weight: 600;
+    width: 85%;
+    cursor: pointer;
+}
+
+.ExpandArea {
+    cursor: pointer;
+    width: 2px;
+    font-weight: 600;
+    height: 20px;
+}
+
+.row {
+    width: 140px;
+    height: 26px;
+}
+
+.block {
+    display: inline-block;
+}
