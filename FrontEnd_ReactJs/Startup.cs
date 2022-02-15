@@ -1,10 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebBS.Core.Service;
+using WebBS.Data.Models;
+using WebBS.Data.Repository;
+using WebBS.Data.Repository.Contract;
 
 namespace FrontEnd_ReactJs
 {
@@ -21,7 +25,15 @@ namespace FrontEnd_ReactJs
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllersWithViews();
+            services.AddDbContext<WebBSContext>(options =>
+            {
+                options.UseInMemoryDatabase("InMemoryDatabase");
+            });
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IWebBSService, WebBSService>();
+
+            services.AddControllersWithViews().AddNewtonsoftJson().AddRazorRuntimeCompilation();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -33,6 +45,10 @@ namespace FrontEnd_ReactJs
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var scope = app.ApplicationServices.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<WebBSContext>();
+            DBInitService.Init(context);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -52,9 +68,7 @@ namespace FrontEnd_ReactJs
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
 
             app.UseSpa(spa =>

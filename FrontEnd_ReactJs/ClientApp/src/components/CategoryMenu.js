@@ -1,27 +1,54 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import CategoryItem from './CategoryItem'
 
 function CategoryMenu() {
+    const [menu, setMenu] = useState(null);
+
+    useEffect(() => {
+        fetchMenu();
+        console.log(menu)
+      }, []);
+
+    const fetchMenu = async () =>
+    {
+        const response = await fetch('/api/home',
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+              }
+        }).then(x => x.json())
+
+        setMenu(response)
+        console.log(response)
+        return response;
+    }
+
+
+ 
+    //var categories = fetchMenu();
+
+    //console.log(categories)
+
+    // <CategoryItem name={menu[0].name}/>
+
+
 
     return (
         <div>
-            <CategoryItem name={"Datorer"}/>
-            <CategoryItem name={"Datorer"}/>
-            <CategoryItem name={"Datorer"}/>
-            <CategoryItem name={"Datorer"}/>
-            <CategoryItem name={"Datorer"}/>
-            <CategoryItem name={"Datorer"}/>
-            <CategoryItem name={"Datorer"}/>
-            <CategoryItem name={"Datorer"}/>
-            <CategoryItem name={"Datorer"}/>
-            <CategoryItem name={"Datorer"}/>
-            <ul>
-                <li>Menu1</li>
-                <li>Menu2</li>
-                <li>Menu3</li>
-            </ul>
+            {
+               menu ? (<div>
+                   {
+                       menu.map(m =>
+                        <CategoryItem menuItem={m} key={m.id}/>
+                        )
+                   }
+               </div>):(<div>Loading...</div>) 
+            }
         </div>
     );
+
+
 }
 
 
