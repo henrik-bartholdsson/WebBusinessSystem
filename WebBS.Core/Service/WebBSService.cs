@@ -36,9 +36,9 @@ namespace WebBS.Core.Service
                 .GetSubCategoriesAsync(guid)
                 .Result;
 
-            var myGuids = GetCategoriesId(categories);
+            var guids = GetCategoriesId(categories);
 
-            foreach(var g in myGuids)
+            foreach(var g in guids)
             {
                 items.AddRange(
                     _unitOfWork

@@ -19,7 +19,8 @@ namespace WebBS.Data.Repository
 
         public async Task<IEnumerable<Item>> GetItemsByCategoryId(Guid guid)
         {
-            return await _context.Items.Where(x => x.Category == guid).ToListAsync();
+            var items = await _context.Items.Where(x => x.Category == guid).ToListAsync();
+            return items;
         }
     }
 }
