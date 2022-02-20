@@ -10,12 +10,16 @@
 
 .VisualPadding {
     background-color:rgb(53, 197, 101);
-    width: 3%;
+    width: 4px;
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
     height: 24px;
     overflow: hidden;
-    visibility: hidden;
+    visibility: visible ;  
+}
+
+.HideVisualPadding {
+    visibility: hidden;    
 }
 
 .TextArea {
@@ -33,6 +37,12 @@
     height: 20px;
 }
 
+.HideExpandArea {
+    width: 0px;
+    height: 0px;
+    visibility: hidden; 
+}
+
 .row {
     width: 140px;
     height: 26px;
@@ -41,3 +51,8 @@
 .block {
     display: inline-block;
 }
+
+.collapsed .submenu {
+    height: 0;
+    overflow: hidden;
+  }

@@ -6,7 +6,6 @@ function CategoryMenu() {
 
     useEffect(() => {
         fetchMenu();
-        console.log(menu)
       }, []);
 
     const fetchMenu = async () =>
@@ -20,7 +19,7 @@ function CategoryMenu() {
         }).then(x => x.json())
 
         setMenu(response)
-        console.log(response)
+        
         return response;
     }
 
@@ -39,7 +38,7 @@ function CategoryMenu() {
             {
                menu ? (<div>
                    {
-                       menu.map(m =>
+                       menu.map(m => 
                         <CategoryItem menuItem={m} key={m.id}/>
                         )
                    }
