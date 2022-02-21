@@ -23,16 +23,6 @@ function CategoryMenu() {
         return response;
     }
 
-
- 
-    //var categories = fetchMenu();
-
-    //console.log(categories)
-
-    // <CategoryItem name={menu[0].name}/>
-
-
-
     return (
         <div>
             {
