@@ -7,6 +7,9 @@ namespace WebBS.Core.Service
     {
         public static void Init(WebBSContext context)
         {
+            var Menu1 = Guid.NewGuid();
+            var Menu2 = Guid.NewGuid();
+
             var TopA = Guid.NewGuid();
             var TopB = Guid.NewGuid();
             var MidA = Guid.NewGuid();
@@ -20,15 +23,14 @@ namespace WebBS.Core.Service
             var Usb = new Category { Name = "Usb-minne", Id = usbId, ParentId = MidA };
 
             var lowB = new Category { Name = "LowB31", Id = Guid.NewGuid(), ParentId = MidB };
-
             var lowC = new Category { Name = "LowB32", Id = Guid.NewGuid(), ParentId = MidC };
 
             var midA = new Category { Name = "Lagring", Id = MidA, ParentId = TopA };
             var midB = new Category { Name = "MidB21", Id = MidB, ParentId = TopB };
             var midC = new Category { Name = "MidB22", Id = MidC, ParentId = TopB };
 
-            var topA = new Category { Name = "ProductsA11", Id = TopA, TopLevel = true };
-            var topB = new Category { Name = "ProductsB11", Id = TopB, TopLevel = true };
+            var topA = new Category { Name = "ProductsA11", Id = TopA, ParentId = null, TopLevel = true };
+            var topB = new Category { Name = "ProductsB11", Id = TopB, ParentId = null, TopLevel = true };
 
             context.Categories.Add(topA);
             context.Categories.Add(topB);

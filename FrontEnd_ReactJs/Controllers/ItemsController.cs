@@ -18,7 +18,7 @@ namespace FrontEnd_ReactJs.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetItems([FromQuery]Guid guid)
+        public IActionResult GetItems([FromQuery] Guid guid)
         {
             var itemsInCategory = _service.GetAllItemsInCategory(guid).Result;
 

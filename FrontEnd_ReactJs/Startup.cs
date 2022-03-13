@@ -27,7 +27,9 @@ namespace FrontEnd_ReactJs
 
             services.AddDbContext<WebBSContext>(options =>
             {
-                options.UseInMemoryDatabase("InMemoryDatabase");
+                var connectionString = Configuration.GetConnectionString("MySql");
+                options.UseMySql(connectionString);
+                //options.UseInMemoryDatabase("InMemoryDatabase");
             });
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();

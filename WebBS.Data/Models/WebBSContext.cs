@@ -12,6 +12,7 @@ namespace WebBS.Data.Models
 
         }
 
+        //public DbSet<Menu> Menu { get; set; }
         public DbSet<OrderHead> OrderHeads { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Category> Categories { get; set; }
