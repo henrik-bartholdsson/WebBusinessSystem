@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Linq;
 using WebBS.Core.Service;
 using WebBS.Data.Models;
 using WebBS.Data.Repository;
@@ -49,7 +50,13 @@ namespace FrontEnd_ReactJs
         {
             var scope = app.ApplicationServices.CreateScope();
             var context = scope.ServiceProvider.GetRequiredService<WebBSContext>();
-            DBInitService.Init(context);
+
+            var dbCreated = context.Database.EnsureCreated();
+
+            if(dbCreated)
+            {
+                DBInitService.Init(context);
+            }
 
             if (env.IsDevelopment())
             {
